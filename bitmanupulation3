@@ -1,0 +1,212 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+void print_bin(int num) {
+
+        int i;
+
+        for (i = 31; i >= 0; i--) {
+                printf("%d",((num >> i) & 1));
+                if (i % 8 == 0)
+                        printf(" ");
+        }
+        printf("\n");
+
+}
+
+int input(void) {
+        int num;
+        printf("Enter a number: ");
+        scanf("%d",&num);
+        return num;
+}
+
+
+int main() {
+
+        //int a = 10;
+
+        //print_bin(a);
+
+        //set most significant bit of a given number
+        // num = num | (1 << 31)
+
+#ifdef SET_MSB
+        int num;
+        num = input();
+        printf("Entered number:%d\n",num);
+        num = num | (1 << 31);
+        printf("Number after setting MSB\n");
+        print_bin(num);
+#endif
+
+        /* Clear most significant bit */
+        //num = num & ~(1 << 31);
+
+#ifdef CLR_MSB
+        int num;
+        num = input();
+        printf("Entered number:%d\n",num);
+        num = num & ~(1 << 31);
+        print_bin(num);
+#endif
+#ifdef INVERT_ALL
+        /* invrts all bits i a given number */
+        //num = num ^ ~0;
+
+        int num;
+        num = input();
+        printf("Entered number:%d\n",num);
+        print_bin(num);
+        num = num ^ ~0;
+        print_bin(num);
+
+#endif
+
+#ifdef SET_ALL
+        /* set all bits */
+        //num = num | ~0;
+        int num;
+        num = input();
+        printf("Entered number:%d\n",num);
+        print_bin(num);
+        num = num | ~0;
+        print_bin(num);
+#endif
+
+#ifdef INVERT_LSB_BYTE
+        /* Invert least significant bytes*/
+        //num = num ^ 0xff;
+        int num;
+        num = input();
+        printf("Entered number:%d\n",num);
+        print_bin(num);
+        num = num ^ 0xff;
+        print_bin(num);
+#endif
+
+#ifdef INVERT_EVEN_POS
+        /* Invert all bit at even position */
+        // num = num ^ 0x55555555;
+        int num;
+        num = input();
+        printf("Entered number:%d\n",num);
+        print_bin(num);
+        num = num ^ 0x55555555;
+        print_bin(num);
+#endif
+
+#ifdef INVERT_ODD
+        /* Invert at odd position */
+        // num = num ^ 0xaaaaaaaa;
+        int num;
+        num = input();
+        printf("Entered number:%d\n",num);
+        print_bin(num);
+        num = num ^ 0xaaaaaaaa;
+        print_bin(num);
+#endif
+
+#ifdef CLR_AT_ALL_EVEN
+        /* Clear all bits at even position */
+        // num = num & 0xaaaaaaaa;
+        int num;
+        num = input();
+        printf("Entered number:%d\n",num);
+        print_bin(num);
+        num = num & 0xaaaaaaaa;
+        print_bin(num);
+#endif
+
+#ifdef CLR_AT_ALL_ODD
+        /* clear at odd position bits */
+        // num = num & 0x55555555;
+        int num;
+        num = input();
+        printf("Entered number:%d\n",num);
+        print_bin(num);
+        num = num & 0x55555555;
+        print_bin(num);
+#endif
+
+#ifdef SET_ALL_EVEN_BIT
+        /* set all the bits at even position */
+        int num;
+        num = input();
+        printf("Entered number:%d\n",num);
+        print_bin(num);
+        num = num | 0x55555555;
+        print_bin(num);
+#endif
+
+#ifdef TRAILING_ZERO
+        /* insert three trailing zero */
+
+        int num;
+        num = input();
+        printf("Entered number:%d\n",num);
+        print_bin(num);
+        //num = (num >> 3) << 3;
+        num = (num & 0xfffffff8);
+        print_bin(num);
+#endif
+#ifdef MUL_BY_7
+        /* multi[ly by 7 using bitwise operator */
+
+        int num;
+        num = input();
+        printf("Entered number:%d\n",num);
+        print_bin(num);
+        num = (num << 3) - num;
+        print_bin(num);
+        printf("after multipilication num:%d\n",num);
+#endif
+
+#ifdef SWAP_EVEN_ODD_BIT
+        /* swap the bits present at even position with bit present at odd position*/
+        int num;
+        num = input();
+        printf("Entered number:%d\n",num);
+        print_bin(num);
+        num = ((num & 0x55555555) << 1) | ((num & 0xaaaaaaaa) >> 1);
+        print_bin(num);
+#endif
+
+#ifdef SWAP_NIBBLES
+        /* Swap nibbles (4-bits) */
+
+        int num;
+        num = input();
+        printf("Entered number:%d\n",num);
+        print_bin(num);
+        num = ((num & 0x0f0f0f0f) << 4) | ((num & 0xf0f0f0f0) >> 4);
+        print_bin(num);
+#endif
+
+#ifdef SWAP_B
+        /* Swap adjecent bytes */
+        int num;
+        num = input();
+        printf("Entered number:%d\n",num);
+        print_bin(num);
+        num = ((num  & 0x00ff00ff) << 8) | ((num & 0xff00ff00) >> 8);
+        print_bin(num);
+#endif
+
+      /* Reverse Bytes of an unsigned integer 32-bits */
+         //  3       2          1       0
+        //11111010 00010010 11001101 00000100
+        //after reverse
+        //   3         2        1        0
+        // 00000100 11001101 00010010 11111010
+        int num;
+        num = input();
+        printf("Entered number:%d\n",num);
+        print_bin(num);
+        int tmp1 = (num >> 24);
+        tmp1 = tmp1 & 0x000000ff;
+        int tmp2 = ((num & 0xff0000) >> 8);
+        int tmp3 = ((num & 0xff00) << 8);
+        int tmp4 = (num << 24);
+        print_bin(tmp1 | tmp2 | tmp3 | tmp4);
